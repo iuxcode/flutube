@@ -1,6 +1,6 @@
 # flutube
 
-A new Flutter project.
+Youtube clone redesign approach with flutter.
 
 ## Getting Started
 
