@@ -76,7 +76,7 @@ extension E on Themes {
   Color get colorSchemeSeed {
     switch (this) {
       case Themes.blue:
-        return const Color(0xFF1651E7);
+        return const Color(0xFFFF0000);
     }
   }
 }

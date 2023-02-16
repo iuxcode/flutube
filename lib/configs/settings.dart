@@ -13,7 +13,7 @@ class AppSettings {
   AppSettings._();
 
   /// App information's
-  String get appName => 'Parrot';
+  String get appName => 'FluTube';
   String get appVersion => '1.0.0';
 
   /// Default theme
@@ -21,7 +21,7 @@ class AppSettings {
 
   /// Default pages horizontal padding value
   EdgeInsets get pagePadding =>
-      EdgeInsets.symmetric(horizontal: Flu.screenWidth * .075);
+      EdgeInsets.symmetric(horizontal: Flu.screenWidth * .065);
 
   /// Default button size
   double get buttonSize => 70;
