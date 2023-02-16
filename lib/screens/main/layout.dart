@@ -4,9 +4,11 @@ import 'package:flukit/widgets/flu_widgets.dart';
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutube/configs/settings.dart';
+import 'package:flutube/widgets/recommended_channels.dart';
 
 import '../../data/categories.dart';
 import '../../data/videos.dart';
+import '../../widgets/bottom_nav_bar.dart';
 import '../../widgets/shorts.dart';
 import '../../widgets/video.dart';
 
@@ -72,7 +74,7 @@ class _MainScreenState extends State<MainScreen>
                   ],
                 ),
               ),
-              30.ph,
+              /* 30.ph,
               Container(
                 height: settings.buttonSize - 5,
                 margin: settings.pagePadding,
@@ -99,12 +101,14 @@ class _MainScreenState extends State<MainScreen>
                     contentPadding: const EdgeInsets.only(left: 15),
                   ),
                 ),
-              ),
+              ), */
               30.ph,
               TabBar(
                 controller: tabController,
                 padding: settings.pagePadding,
-                indicator: const RectangularIndicator(),
+                /* indicator:
+                    RectangularIndicator(color: colorScheme.primaryContainer), */
+                labelColor: colorScheme.onPrimaryContainer,
                 unselectedLabelColor: colorScheme.onBackground,
                 splashFactory: NoSplash.splashFactory,
                 isScrollable: true,
@@ -119,46 +123,45 @@ class _MainScreenState extends State<MainScreen>
               30.ph,
               const Divider(),
               15.ph,
-              Padding(
-                padding: settings.pagePadding,
-                child: Row(
-                  children: [
-                    const FluImage.svg(
-                      'assets/shorts_logo.svg',
-                      height: 35,
-                      width: 35,
-                    ),
-                    5.pw,
-                    Text('Shorts',
-                        style: Flu.getTextThemeOf(context).headlineSmall),
-                  ],
-                ),
-              ),
-              30.ph,
               const Shorts(),
               30.ph,
               const Divider(),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                padding: settings.pagePadding.copyWith(top: 30),
+                padding: EdgeInsets.only(top: 30),
                 shrinkWrap: true,
                 itemCount: videos.length,
-                itemBuilder: (context, index) => Column(
-                  children: [
-                    Video(
-                      videos[index],
-                      margin: EdgeInsets.zero,
-                    ),
-                    15.ph,
-                    const Divider(),
-                    15.ph,
-                  ],
-                ),
+                itemBuilder: (context, index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (index != 0) ...[
+                        15.ph,
+                        const Divider(),
+                        15.ph,
+                      ],
+                      Video(videos[index]),
+                      if (index == 1) ...[
+                        15.ph,
+                        const Divider(),
+                        15.ph,
+                        const RecommendedChannels(),
+                      ]
+                    ],
+                  );
+                },
               )
             ],
           ),
         ),
       ),
+      bottomNavigationBar: BottomNavBar(items: [
+        FluIcons.home2,
+        FluIcons.sliderVertical1,
+        FluIcons.addSquare,
+        FluIcons.people,
+        FluIcons.musicLibrary2,
+      ]),
     );
   }
 }

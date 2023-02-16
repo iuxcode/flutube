@@ -29,6 +29,7 @@ class Shorts extends StatelessWidget {
             ],
           ),
         ),
+        30.ph,
         SizedBox(
           height: itemHeight,
           child: ListView.builder(

@@ -66,10 +66,18 @@ class Video extends StatelessWidget {
                   ),
                 ],
               )),
-              FluButton.icon(
-                FluIcons.more,
+              FluButton(
                 onPressed: () {},
                 margin: const EdgeInsets.only(left: 5),
+                backgroundColor: Colors.transparent,
+                alignment: Alignment.centerRight,
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: FluIcon(
+                    FluIcons.more,
+                    color: colorScheme.onBackground,
+                  ),
+                ),
               )
             ],
           )

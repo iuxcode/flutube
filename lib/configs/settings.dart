@@ -32,6 +32,5 @@ class AppSettings {
   double get buttonMdCornerRadius => 20;
 
   /// Bottom navigation bar dimensions
-  double get bottomNavigationBarHeight => Flu.screenHeight * .1;
-  double get bottomNavigationBarCornerRadius => 0;
+  double get bottomNavigationBarHeight => Flu.screenHeight * .085;
 }

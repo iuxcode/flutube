@@ -20,6 +20,7 @@ class ThemeManager {
   ThemeData get lightTheme {
     return _buildTheme(
       ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: settings.defaultTheme.colorSchemeSeed,
           brightness: Brightness.light,
@@ -31,6 +32,7 @@ class ThemeManager {
   ThemeData get darkTheme {
     return _buildTheme(
       ThemeData(
+        useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
           seedColor: settings.defaultTheme.colorSchemeSeed,
           brightness: Brightness.dark,

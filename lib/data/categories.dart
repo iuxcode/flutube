@@ -1,7 +1,7 @@
 import '../models/category.dart';
 
 final List<VideoCategory> videoCategories = [
-  VideoCategory('All'),
+  VideoCategory('For you'),
   VideoCategory('Music'),
   VideoCategory('Games'),
   VideoCategory('UI'),
