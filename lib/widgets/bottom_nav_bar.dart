@@ -21,11 +21,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final GlobalKey _itemKey = GlobalKey();
 
   double _itemWidth = 0;
+  int _currentIndex = 0;
 
   @override
-  void didUpdateWidget(covariant BottomNavBar oldWidget) {
-    // getItemWidth();
-    super.didUpdateWidget(oldWidget);
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => getItemWidth());
   }
 
   void getItemWidth() => setState(() => _itemWidth =
@@ -50,11 +51,22 @@ class _BottomNavBarState extends State<BottomNavBar> {
       child: Stack(
         children: [
           Row(
-              children: widget.items
-                  .map((item) => _BottomNavItem(
-                      key: widget.items.indexOf(item) == 0 ? _itemKey : null,
-                      item))
-                  .toList()),
+              children: widget.items.map((item) {
+            final index = widget.items.indexOf(item);
+            final isCurrent = _currentIndex == index;
+            print({'* $_currentIndex', index, isCurrent});
+
+            return _BottomNavItem(
+              key: index == 0 ? _itemKey : null,
+              item,
+              onTap: () {
+                setState(() => _currentIndex = index);
+              },
+              color: isCurrent
+                  ? colorScheme.primary
+                  : colorScheme.onBackground.withOpacity(.65),
+            );
+          }).toList()),
           _BottomNavIndicator(itemWidth: _itemWidth)
         ],
       ),
@@ -63,22 +75,24 @@ class _BottomNavBarState extends State<BottomNavBar> {
 }
 
 class _BottomNavItem extends StatelessWidget {
-  const _BottomNavItem(this.item, {super.key});
+  const _BottomNavItem(this.item,
+      {required this.onTap, required this.color, super.key});
 
   final FluIcons item;
+  final Color color;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Flu.getColorSchemeOf(context);
-
     return Expanded(
       child: FluButton.icon(
         item,
         size: double.infinity,
         backgroundColor: Colors.transparent,
-        foregroundColor: colorScheme.onBackground,
+        foregroundColor: color,
         iconStrokeWidth: 1.8,
         iconSize: 22,
+        onPressed: onTap,
       ),
     );
   }
@@ -96,9 +110,10 @@ class _BottomNavIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedPositioned(
       bottom: 0,
+      left: 0,
       duration: const Duration(milliseconds: 300),
       child: Container(
-        height: 3,
+        height: 5,
         width: itemWidth,
         alignment: Alignment.center,
         child: Container(

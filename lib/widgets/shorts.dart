@@ -6,7 +6,9 @@ import '../configs/settings.dart';
 import '../data/videos.dart';
 
 class Shorts extends StatelessWidget {
-  const Shorts({super.key});
+  const Shorts({this.title, super.key});
+
+  final String? title;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class Shorts extends StatelessWidget {
                 width: 35,
               ),
               5.pw,
-              Text('Shorts', style: Flu.getTextThemeOf(context).headlineSmall),
+              Text(title ?? 'Shorts',
+                  style: Flu.getTextThemeOf(context).headlineSmall),
             ],
           ),
         ),
@@ -52,9 +55,9 @@ class Shorts extends StatelessWidget {
                   child: Stack(children: [
                     FluImage(
                       short.thumbnail,
+                      height: double.infinity,
                       width: double.infinity,
-                      overlayOpacity: .85,
-                      gradientOverlay: true,
+                      overlayOpacity: .45,
                     ),
                     Positioned.fill(
                         top: null,

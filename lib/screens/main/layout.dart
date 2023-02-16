@@ -4,6 +4,7 @@ import 'package:flukit/widgets/flu_widgets.dart';
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutube/configs/settings.dart';
+import 'package:flutube/configs/themes.dart';
 import 'package:flutube/widgets/recommended_channels.dart';
 
 import '../../data/categories.dart';
@@ -44,8 +45,11 @@ class _MainScreenState extends State<MainScreen>
                 padding: settings.pagePadding,
                 child: Row(
                   children: [
-                    Text('Youtube',
-                        style: Flu.getTextThemeOf(context).headlineSmall),
+                    Text(settings.appName,
+                        style: Flu.getTextThemeOf(context)
+                            .headlineSmall
+                            ?.copyWith(
+                                color: settings.defaultTheme.colorSchemeSeed)),
                     const Spacer(),
                     FluButton.icon(
                       FluIcons.notification,
@@ -74,9 +78,9 @@ class _MainScreenState extends State<MainScreen>
                   ],
                 ),
               ),
-              /* 30.ph,
+              20.ph,
               Container(
-                height: settings.buttonSize - 5,
+                height: settings.buttonSizeMd + 5,
                 margin: settings.pagePadding,
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
@@ -101,17 +105,21 @@ class _MainScreenState extends State<MainScreen>
                     contentPadding: const EdgeInsets.only(left: 15),
                   ),
                 ),
-              ), */
-              30.ph,
+              ),
+              20.ph,
               TabBar(
                 controller: tabController,
                 padding: settings.pagePadding,
-                /* indicator:
-                    RectangularIndicator(color: colorScheme.primaryContainer), */
-                labelColor: colorScheme.onPrimaryContainer,
+                labelPadding:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 2),
+                indicator: RectangularIndicator(
+                    color: colorScheme.primary, cornerRadius: 999),
+                indicatorSize: TabBarIndicatorSize.tab,
+                labelColor: colorScheme.onPrimary,
                 unselectedLabelColor: colorScheme.onBackground,
                 splashFactory: NoSplash.splashFactory,
                 isScrollable: true,
+                dividerColor: Colors.transparent,
                 tabs: videoCategories
                     .map((category) => Tab(
                           text: category.label,
@@ -121,14 +129,14 @@ class _MainScreenState extends State<MainScreen>
               30.ph,
               Video(videos[0]),
               30.ph,
-              const Divider(),
+              _divider(),
               15.ph,
               const Shorts(),
               30.ph,
-              const Divider(),
+              _divider(),
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(top: 30),
+                padding: const EdgeInsets.only(top: 30),
                 shrinkWrap: true,
                 itemCount: videos.length,
                 itemBuilder: (context, index) {
@@ -137,16 +145,28 @@ class _MainScreenState extends State<MainScreen>
                     children: [
                       if (index != 0) ...[
                         15.ph,
-                        const Divider(),
+                        Divider(
+                          indent: settings.pagePadding.left,
+                          endIndent: settings.pagePadding.right,
+                          color: colorScheme.outlineVariant.withOpacity(.5),
+                        ),
                         15.ph,
                       ],
                       Video(videos[index]),
-                      if (index == 1) ...[
+                      if (index == 2) ...[
                         15.ph,
-                        const Divider(),
+                        _divider(),
+                        20.ph,
+                        const Shorts(
+                          title: 'Dance',
+                        ),
+                      ]
+                      /* if (index == 1) ...[
+                        15.ph,
+                        _divider(),
                         15.ph,
                         const RecommendedChannels(),
-                      ]
+                      ] */
                     ],
                   );
                 },
@@ -155,7 +175,7 @@ class _MainScreenState extends State<MainScreen>
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavBar(items: [
+      bottomNavigationBar: const BottomNavBar(items: [
         FluIcons.home2,
         FluIcons.sliderVertical1,
         FluIcons.addSquare,
@@ -164,4 +184,7 @@ class _MainScreenState extends State<MainScreen>
       ]),
     );
   }
+
+  Widget _divider() => Divider(
+      color: Flu.getColorSchemeOf(context).outlineVariant.withOpacity(.25));
 }

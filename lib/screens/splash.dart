@@ -4,6 +4,7 @@ import 'package:flukit/widgets/image.dart';
 import 'package:flukit/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutube/configs/routes.dart';
+import 'package:flutube/configs/themes.dart';
 
 import '../configs/settings.dart';
 
@@ -19,24 +20,26 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(
-        const Duration(seconds: 10),
+        const Duration(seconds: 6),
         () => router.replace(Routes.main,
-            clearHistory: true)); // Delayed to 5 seconds to simulate loading.
+            clearHistory: true)); // Delayed to six seconds to simulate loading.
   }
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Flu.getColorSchemeOf(context);
+    final backgroundColor = colorScheme.primary;
+    final foregroundColor = colorScheme.onPrimary;
 
     return FluScreen(
       systemUiOverlayStyle: Flu.getDefaultSystemUiOverlayStyle(context)
           .copyWith(
-              statusBarColor: colorScheme.primary,
+              statusBarColor: backgroundColor,
               statusBarBrightness: Brightness.light,
               statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: colorScheme.primary,
+              systemNavigationBarColor: backgroundColor,
               systemNavigationBarIconBrightness: Brightness.light),
-      background: colorScheme.primary,
+      background: backgroundColor,
       body: SafeArea(
         child: Column(
           children: [
@@ -47,13 +50,12 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: Flu.screenHeight * .15),
             )),
             FluLoader(
-                color: colorScheme.surfaceVariant,
+                color: foregroundColor,
                 margin: EdgeInsets.only(bottom: Flu.screenHeight * .075)),
             Text(
               settings.appName.toUpperCase(),
               style: Flu.getTextThemeOf(context).titleMedium?.copyWith(
-                  color: colorScheme.surfaceVariant,
-                  fontWeight: FontWeight.w600),
+                  color: foregroundColor, fontWeight: FontWeight.w600),
             ),
             SizedBox(height: Flu.screenHeight * .15),
           ],

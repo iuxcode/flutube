@@ -27,7 +27,8 @@ class Video extends StatelessWidget {
             video.thumbnail,
             height: Flu.screenHeight * .25,
             width: double.infinity,
-            overlayOpacity: .2,
+            overlayOpacity:
+                Flu.getThemeOf(context).brightness == Brightness.dark ? .1 : .2,
             cornerRadius: 35,
           ),
           15.ph,

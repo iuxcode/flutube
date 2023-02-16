@@ -13,7 +13,7 @@ class AppSettings {
   AppSettings._();
 
   /// App information's
-  String get appName => 'FluTube';
+  String get appName => 'Youtube.';
   String get appVersion => '1.0.0';
 
   /// Default theme
