@@ -1,11 +1,10 @@
-import 'package:flukit/screens/base.dart';
 import 'package:flukit/screens/flu_screens.dart';
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutube/configs/settings.dart';
 
-import '../../data/categories.dart';
 import 'pages/home.dart';
+import 'pages/library.dart';
 import 'pages/short.dart';
 import 'pages/subscriptions.dart';
 
@@ -41,7 +40,7 @@ class MainScreen extends StatelessWidget {
         FluScreenPage(
           icon: FluIcons.musicLibrary2,
           label: 'library',
-          content: const SafeArea(child: Text('hhq')),
+          content: const LibraryScreen(),
         ),
       ],
       bottomNavPadding:

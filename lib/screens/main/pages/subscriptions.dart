@@ -33,6 +33,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen>
 
     return SafeArea(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(top: 15, bottom: 30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,7 +97,8 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen>
                   ),
                   Text(
                     'Latest\nReleases.',
-                    style: Flu.getTextThemeOf(context).headlineSmall,
+                    style: Flu.getTextThemeOf(context).headlineSmall?.copyWith(
+                        color: colorScheme.onBackground.withOpacity(.35)),
                   ),
                 ],
               ),
@@ -124,6 +126,7 @@ class _Channels extends StatelessWidget {
     return Container(
       height: itemSize + 40,
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         padding: settings.pagePadding,
         itemCount: 10,

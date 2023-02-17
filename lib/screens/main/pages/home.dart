@@ -1,5 +1,4 @@
-import 'package:flukit/utils/flu_utils.dart';
-import 'package:flukit/widgets/flu_widgets.dart';
+import 'package:flukit/flukit.dart';
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutube/models/category.dart';
@@ -33,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen>
 
     return SafeArea(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(top: 15, bottom: 30),
         child: Column(
           children: [
@@ -45,6 +45,16 @@ class _HomeScreenState extends State<HomeScreen>
                       settings.appName,
                       style: Flu.getTextThemeOf(context).headlineSmall,
                     ),
+                  ),
+                  FluButton.icon(
+                    Get.isDarkMode ? FluIcons.sun : FluIcons.moon,
+                    onPressed: () => Flu.changeThemeMode(),
+                    size: 45,
+                    iconSize: 18,
+                    iconStrokeWidth: 1.8,
+                    backgroundColor: colorScheme.surfaceVariant,
+                    foregroundColor: colorScheme.onSurfaceVariant,
+                    margin: const EdgeInsets.only(right: 8),
                   ),
                   FluBadge(
                     position: BadgePosition.topRight,
