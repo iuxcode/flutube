@@ -10,6 +10,54 @@ import 'package:flutube/configs/settings.dart';
 
 import '../models/video.dart';
 
+class Videos extends StatelessWidget {
+  const Videos(this.videos, this.colorScheme, {super.key});
+
+  final ColorScheme colorScheme;
+  final List<VideoModel> videos;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(top: 30),
+      shrinkWrap: true,
+      itemCount: videos.length,
+      itemBuilder: (context, index) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (index != 0)
+              const KDivider(padding: EdgeInsets.symmetric(vertical: 30)),
+            Video(videos[index]),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class KDivider extends StatelessWidget {
+  const KDivider({
+    super.key,
+    this.padding,
+  });
+
+  final EdgeInsets? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding ?? const EdgeInsets.only(top: 25, bottom: 15),
+      child: Divider(
+        indent: settings.pagePadding.left + 5,
+        endIndent: settings.pagePadding.right + 5,
+        color: Flu.getColorSchemeOf(context).outlineVariant.withOpacity(.25),
+      ),
+    );
+  }
+}
+
 class Video extends StatelessWidget {
   const Video(this.video, {this.margin, super.key});
 

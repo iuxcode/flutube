@@ -7,6 +7,7 @@ import 'package:flutube/configs/settings.dart';
 import '../../data/categories.dart';
 import 'pages/home.dart';
 import 'pages/short.dart';
+import 'pages/subscriptions.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -35,12 +36,12 @@ class MainScreen extends StatelessWidget {
         FluScreenPage(
           icon: FluIcons.people,
           label: 'subscription\'s',
-          content: const SizedBox(),
+          content: const SubscriptionsScreen(),
         ),
         FluScreenPage(
           icon: FluIcons.musicLibrary2,
           label: 'library',
-          content: const SizedBox(),
+          content: const SafeArea(child: Text('hhq')),
         ),
       ],
       bottomNavPadding:

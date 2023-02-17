@@ -2,6 +2,7 @@ import 'package:flukit/utils/flu_utils.dart';
 import 'package:flukit/widgets/flu_widgets.dart';
 import 'package:flukit_icons/flukit_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutube/models/category.dart';
 
 import '../../../configs/settings.dart';
 import '../../../data/categories.dart';
@@ -42,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
                   Expanded(
                     child: Text(
                       settings.appName,
-                      style: Flu.getTextThemeOf(context).titleLarge,
+                      style: Flu.getTextThemeOf(context).headlineSmall,
                     ),
                   ),
                   FluBadge(
@@ -83,29 +84,15 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
               ),
             ),
-            TabBar(
-              controller: tabController,
-              padding: settings.pagePadding.copyWith(top: 20, bottom: 25),
-              labelPadding: const EdgeInsets.symmetric(horizontal: 15),
-              indicator: RectangularIndicator(
-                  color: colorScheme.primary, cornerRadius: 999),
-              indicatorSize: TabBarIndicatorSize.tab,
-              labelColor: colorScheme.onPrimary,
-              unselectedLabelColor: colorScheme.onBackground.withOpacity(.65),
-              splashFactory: NoSplash.splashFactory,
-              isScrollable: true,
-              dividerColor: Colors.transparent,
-              tabs: videoCategories
-                  .map((category) => Tab(
-                        text: category.label,
-                      ))
-                  .toList(),
+            CategoriesTab(
+              tabController: tabController,
+              categories: videoCategories,
             ),
             Video(videos[0]),
-            const _Divider(),
+            const KDivider(),
             Shorts(shorts),
-            const _Divider(padding: EdgeInsets.only(top: 30)),
-            _Videos(colorScheme),
+            const KDivider(padding: EdgeInsets.only(top: 30)),
+            Videos(videos, colorScheme),
           ],
         ),
       ),
@@ -113,49 +100,34 @@ class _HomeScreenState extends State<HomeScreen>
   }
 }
 
-class _Videos extends StatelessWidget {
-  const _Videos(this.colorScheme, {super.key});
+class CategoriesTab extends StatelessWidget {
+  const CategoriesTab(
+      {super.key, required this.tabController, required this.categories});
 
-  final ColorScheme colorScheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      padding: const EdgeInsets.only(top: 30),
-      shrinkWrap: true,
-      itemCount: videos.length,
-      itemBuilder: (context, index) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (index != 0)
-              const _Divider(padding: EdgeInsets.symmetric(vertical: 30)),
-            Video(videos[index]),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _Divider extends StatelessWidget {
-  const _Divider({
-    super.key,
-    this.padding,
-  });
-
-  final EdgeInsets? padding;
+  final TabController tabController;
+  final List<VideoCategory> categories;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: padding ?? const EdgeInsets.only(top: 25, bottom: 15),
-      child: Divider(
-        indent: settings.pagePadding.left + 5,
-        endIndent: settings.pagePadding.right + 5,
-        color: Flu.getColorSchemeOf(context).outlineVariant.withOpacity(.25),
-      ),
+    final colorScheme = Flu.getColorSchemeOf(context);
+
+    return TabBar(
+      controller: tabController,
+      padding: settings.pagePadding.copyWith(top: 20, bottom: 25),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 15),
+      indicator:
+          RectangularIndicator(color: colorScheme.primary, cornerRadius: 999),
+      indicatorSize: TabBarIndicatorSize.tab,
+      labelColor: colorScheme.onPrimary,
+      unselectedLabelColor: colorScheme.onBackground.withOpacity(.65),
+      splashFactory: NoSplash.splashFactory,
+      isScrollable: true,
+      dividerColor: Colors.transparent,
+      tabs: categories
+          .map((category) => Tab(
+                text: category.label,
+              ))
+          .toList(),
     );
   }
 }
