@@ -3,12 +3,13 @@ import 'package:flukit/widgets/flu_widgets.dart';
 import 'package:flutter/material.dart';
 
 import '../configs/settings.dart';
-import '../data/videos.dart';
+import '../models/video.dart';
 
 class Shorts extends StatelessWidget {
-  const Shorts({this.title, super.key});
+  const Shorts(this.shorts, {this.title, super.key});
 
   final String? title;
+  final List<VideoModel> shorts;
 
   @override
   Widget build(BuildContext context) {

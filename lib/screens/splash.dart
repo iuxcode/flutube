@@ -32,13 +32,12 @@ class _SplashScreenState extends State<SplashScreen> {
     final foregroundColor = colorScheme.onPrimary;
 
     return FluScreen(
-      systemUiOverlayStyle: Flu.getDefaultSystemUiOverlayStyle(context)
-          .copyWith(
-              statusBarColor: backgroundColor,
-              statusBarBrightness: Brightness.light,
-              statusBarIconBrightness: Brightness.light,
-              systemNavigationBarColor: backgroundColor,
-              systemNavigationBarIconBrightness: Brightness.light),
+      overlayStyle: Flu.getDefaultSystemUiOverlayStyle(context).copyWith(
+          statusBarColor: backgroundColor,
+          statusBarBrightness: Brightness.light,
+          statusBarIconBrightness: Brightness.light,
+          systemNavigationBarColor: backgroundColor,
+          systemNavigationBarIconBrightness: Brightness.light),
       background: backgroundColor,
       body: SafeArea(
         child: Column(

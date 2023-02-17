@@ -1,3 +1,4 @@
+import 'package:flukit/flukit.dart';
 import 'package:flukit/utils/flu_utils.dart';
 import 'package:flukit/widgets/avatar.dart';
 import 'package:flukit/widgets/button.dart';
@@ -18,6 +19,7 @@ class Video extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Flu.getColorSchemeOf(context);
+    const double avatarSize = 45, avatarCornerRadius = 18;
 
     return Container(
       margin: margin ?? settings.pagePadding,
@@ -35,22 +37,22 @@ class Video extends StatelessWidget {
           Row(
             children: [
               FluAvatar(
-                size: 45,
+                size: avatarSize,
                 outlined: true,
-                outlineColor: colorScheme.surfaceVariant,
-                margin: const EdgeInsets.only(right: 10),
+                outlineThickness: 1.5,
+                outlineColor: colorScheme.primary.withOpacity(.5),
+                margin: const EdgeInsets.only(right: 12),
               ),
               Expanded(
                   child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    video.title,
+                    video.title.capitalizeFirst!,
                     style: Flu.getTextThemeOf(context)
                         .titleMedium
                         ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  3.ph,
                   Row(
                     children: [
                       Text(video.publisher,
@@ -67,18 +69,13 @@ class Video extends StatelessWidget {
                   ),
                 ],
               )),
-              FluButton(
+              FluButton.icon(
+                FluIcons.more2,
                 onPressed: () {},
+                foregroundColor: colorScheme.onSurfaceVariant,
                 margin: const EdgeInsets.only(left: 5),
-                backgroundColor: Colors.transparent,
-                alignment: Alignment.centerRight,
-                child: RotatedBox(
-                  quarterTurns: 3,
-                  child: FluIcon(
-                    FluIcons.more,
-                    color: colorScheme.onBackground,
-                  ),
-                ),
+                size: avatarSize,
+                backgroundColor: colorScheme.surfaceVariant.withOpacity(.25),
               )
             ],
           )
