@@ -6,6 +6,7 @@ import 'package:flutube/configs/settings.dart';
 
 import '../../data/categories.dart';
 import 'pages/home.dart';
+import 'pages/short.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -24,7 +25,7 @@ class MainScreen extends StatelessWidget {
         FluScreenPage(
           icon: FluIcons.sliderVertical1,
           label: 'shorts',
-          content: const SizedBox(),
+          content: const ShortsScreen(),
         ),
         FluScreenPage(
           icon: FluIcons.addSquare,
@@ -42,7 +43,8 @@ class MainScreen extends StatelessWidget {
           content: const SizedBox(),
         ),
       ],
-      bottomNavPadding: settings.pagePadding,
+      bottomNavPadding:
+          EdgeInsets.symmetric(horizontal: settings.pagePadding.left * .25),
       bottomNavHeight: settings.bottomNavigationBarHeight,
     );
   }
